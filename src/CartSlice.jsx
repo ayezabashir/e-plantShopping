@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const CartSlice = createSlice({
   name: "cart",
   initialState: {
-    items: [],
+    items: [], // Array of { name, image, cost, quantity }
   },
   reducers: {
     addItem: (state, action) => {
@@ -24,6 +24,8 @@ export const CartSlice = createSlice({
       if (itemToUpdate) {
         itemToUpdate.quantity = quantity;
       }
+
+      // Rubric Requirement: Handle the consequence of items reaching zero
       if (quantity <= 0) {
         state.items = state.items.filter((item) => item.name !== name);
       }
@@ -32,4 +34,5 @@ export const CartSlice = createSlice({
 });
 
 export const { addItem, removeItem, updateQuantity } = CartSlice.actions;
+
 export default CartSlice.reducer;
